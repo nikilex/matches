@@ -92,5 +92,7 @@ export function createApp() {
 }
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const { server } = createApp();
-  server.listen(Number(process.env.PORT || 3000), '0.0.0.0', () => console.log(`Matches: http://localhost:${server.address().port}`));
+  const host = process.env.APP_IP || '0.0.0.0';
+  const port = Number(process.env.APP_PORT || process.env.PORT || 3000);
+  server.listen(port, host, () => console.log(`Matches: http://${host}:${server.address().port}`));
 }
